@@ -5,7 +5,6 @@
 ## Environment
 * Windows 10
 * Google chrome
-<br>
 
 ## Setup
 ### pip install
@@ -17,7 +16,6 @@ pip install -r requirements.txt
 cd app
 npm install
 ```
-<br>
 
 ## Test running
 ```
