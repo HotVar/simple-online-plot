@@ -28,6 +28,7 @@ export default {
         type: 'spline',
         animation: Highcharts.svg,
         marginRight: 10,
+        backgroundColor: 'black',
         events: {
           load: () => {
             setInterval(() => {
@@ -44,23 +45,77 @@ export default {
           }
         }
       },
+      plotOptions: {
+        series: {
+          color: '#00FF00'
+        }
+      },
       title: {
-        text: 'Simple online plot'
+        text: 'Simple online plot',
+        style: {
+          color: '#00FF00'
+        }
       },
       xAxis: {
+        gridLineColor: '#00FF00',
+        gridLineWidth: 0.5,
+        title: {
+          text: 'iteration / epoch',
+          style: {
+            color: '#00FF00'
+          }
+        },
+        labels: {
+          style: {
+            color: '#00FF00'
+          }
+        }
       },
       yAxis: {
+        gridLineColor: '#00FF00',
+        gridLineWidth: 0.5,
+        title: {
+          text: 'value',
+          style: {
+            color: '#00FF00'
+          }
+        },
+        labels: {
+          style: {
+            color: '#00FF00'
+          }
+        }
+      },
+      tooltip: {
+        headerFormat: '{point.x} iter<br/>',
+        pointFormat: '{point.y:.4f}',
+        backgroundColor: 'black',
+        borderColor: '#00FF00',
+        style: {
+          color: '#00FF00'
+        }
       },
       series: [{
         name: 'metric',
+        marker: {
+          radius: 4.0
+        },
         data: [{
           iter: 0,
           value: 0.0
         }]
-      }]
+      }],
+      credits: {
+        enabled: false
+      }
     })
   },
   components: {
   }
 }
 </script>
+<style>
+body, html {
+  background-color: black;
+}
+</style>
