@@ -80,8 +80,8 @@ export default {
         }
       },
       tooltip: {
-        headerFormat: '{point.x} iter<br/>',
-        pointFormat: '{point.y:.4f}',
+        headerFormat: '{series.name}<br/>',
+        pointFormat: '{point.x} iter<br/>{point.y:.4f}',
         backgroundColor: 'black',
         borderColor: '#00FF00',
         style: {
@@ -91,7 +91,7 @@ export default {
       series: [{
         name: 'train',
         marker: {
-          radius: 7.0
+          radius: 5.0
         },
         color: '#00FF00',
         data: [{
@@ -102,7 +102,7 @@ export default {
       {
         name: 'valid',
         marker: {
-          radius: 7.0
+          radius: 5.0
         },
         color: '#FFE400',
         data: [{
