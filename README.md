@@ -30,10 +30,12 @@ sop = SOP(api_port=8000,
           type='2d_line',
           chrome_path='C:/Program Files/Google/Chrome/Application/chrome.exe')
 iter = 0
-val = 1.0
+train_val = 1.0
+valid_val = 1.0
 while True:
-  iter += 1
-  val *= 0.9
-  sop.meter(iter, val, periods=1)
-  time.sleep(1)
+    iter += 1
+    train_val *= 0.8
+    valid_val *= 0.9
+    sop.meter(iter, train_val, valid_val)
+    time.sleep(3)
 ```
