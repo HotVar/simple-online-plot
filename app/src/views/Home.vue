@@ -15,8 +15,8 @@ export default {
   data () {
     return {
       onTraining: 0,
-      curIter: 0,
-      curValue: 0.0,
+      trainIter: 0,
+      validIter: 0,
       resURL: 'http://127.0.0.1:8000/api/meter/'
     }
   },
@@ -34,20 +34,13 @@ export default {
             setInterval(() => {
               axios.get(this.resURL)
                 .then((response) => {
-                  if (response.data.iter !== this.curIter) {
-                    var series = chart.series[0]
-                    this.curIter = response.data.iter
-                    this.curValue = response.data.value
-                    series.addPoint([this.curIter, this.curValue])
+                  if (response.data.iter !== this.trainIter) {
+                    chart.series[0].addPoint([response.data.iter, response.data.train_val])
+                    chart.series[1].addPoint([response.data.iter, response.data.valid_val])
                   }
                 })
-            }, 3000)
+            }, 500)
           }
-        }
-      },
-      plotOptions: {
-        series: {
-          color: '#00FF00'
         }
       },
       title: {
@@ -96,10 +89,22 @@ export default {
         }
       },
       series: [{
-        name: 'metric',
+        name: 'train',
         marker: {
-          radius: 4.0
+          radius: 7.0
         },
+        color: '#00FF00',
+        data: [{
+          iter: 0,
+          value: 0.0
+        }]
+      },
+      {
+        name: 'valid',
+        marker: {
+          radius: 7.0
+        },
+        color: '#FFE400',
         data: [{
           iter: 0,
           value: 0.0

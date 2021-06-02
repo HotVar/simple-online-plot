@@ -4,6 +4,11 @@ import router from './router'
 import store from './store'
 
 import axios from 'axios'
+import Highcharts from 'highcharts'
+import HighchartsVue from 'highcharts-vue'
+import more from 'highcharts/highcharts-more'
+more(Highcharts)
+Vue.use(HighchartsVue)
 
 Vue.config.productionTip = false
 

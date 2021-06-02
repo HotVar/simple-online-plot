@@ -10,7 +10,7 @@ class SOP():
         self.api_url = f'http://127.0.0.1:{api_port}/api/meter/'
         self.type = type
         self.chrome_path = chrome_path
-        self.items = []
+        self.metrics = []
 
         self.p1 = subprocess.Popen(['python', './api/manage.py', 'runserver', f'{api_port}'], shell=True)
         self.p2 = subprocess.Popen(['cd', './app', '&', 'npm', 'run', 'serve', '--', '--port', f'{app_port}'], shell=True)
@@ -20,14 +20,12 @@ class SOP():
         webbrowser.register(self.chrome_path, None, webbrowser.BackgroundBrowser(self.chrome_path))
         webbrowser.get(chrome_path).open(url)
 
-    def meter(self, iter, value, periods=1):
-        # update own metrics
-        item = {'iter': iter, 'value': value}
-        self.items.append(item)
+    # update own metric
+    def meter(self, iter, train_val, valid_val):
+        data = {'iter': iter, 'train_val': train_val, 'valid_val': valid_val}
+        self.metrics.append(data)
+        print(data)
+        res = requests.post(self.api_url, data=data)
 
-        # post new value to drf server on given periods
-        if iter % periods == 0:
-            res = requests.post(self.api_url, data=item)
-
-    def get_result(self):
-        return self.items
+    def get_result(self, metric):
+        return self.metrics
